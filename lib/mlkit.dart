@@ -22,6 +22,8 @@ class VisionText {
                 .map<Point<num>>(
                     (dynamic item) => Point<num>(item['x'], item['y']))
                 .toList();
+
+  Map toMap() => Map.from(_data);
 }
 
 class VisionTextBlock extends VisionText {
