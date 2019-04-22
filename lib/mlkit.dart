@@ -36,6 +36,10 @@ class VisionTextBlock extends VisionText {
                 .map<VisionTextLine>((dynamic item) => VisionTextLine._(item))
                 .toList(),
         super._(data);
+
+  factory VisionTextBlock.fromMap(Map<dynamic, dynamic> data) {
+    return VisionTextBlock._(data);
+  }
 }
 
 class VisionTextLine extends VisionText {
