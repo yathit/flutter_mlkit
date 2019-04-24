@@ -96,10 +96,12 @@ class FirebaseVisionTextDetector {
     List<dynamic> texts = await _channel.invokeMethod(
         "FirebaseVisionTextDetector#detectFromPath", {'filepath': filepath});
     List<VisionText> ret = [];
-    texts.forEach((dynamic item) {
-      final VisionTextBlock text = new VisionTextBlock._(item);
-      ret.add(text);
-    });
+    if (texts != null) {
+      texts.forEach((dynamic item) {
+        final VisionTextBlock text = new VisionTextBlock._(item);
+        ret.add(text);
+      });
+    }
     return ret;
   }
 }
