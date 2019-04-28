@@ -110,9 +110,11 @@ public class MlkitPlugin implements MethodCallHandler {
     public void onMethodCall(MethodCall call, final Result result) {
 
         FirebaseVisionImage image = null;
+        Integer rotation;
 
         if (call.method.endsWith("#detectFromPath")) {
             String path = call.argument("filepath");
+            rotation = call.argument("rotation");
             File file = new File(path);
             BitmapFactory.Options bounds = new BitmapFactory.Options();
             bounds.inJustDecodeBounds = true;
@@ -123,6 +125,9 @@ public class MlkitPlugin implements MethodCallHandler {
             try {
                 InputStream in = activity.getContentResolver().openInputStream(Uri.fromFile(file));
                 int rotationAngle = getRotationAngle(in);
+                if (rotation != null && rotation > 0) {
+                    rotationAngle += rotation;
+                }
 
                 Bitmap rotatedBitmap = createRotatedBitmap(bm, bounds, rotationAngle);
 

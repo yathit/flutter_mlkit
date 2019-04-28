@@ -92,9 +92,9 @@ class FirebaseVisionTextDetector {
     return ret;
   }
 
-  Future<List<VisionText>> detectFromPath(String filepath) async {
+  Future<List<VisionText>> detectFromPath(String filepath, {int rotateAngle = 0}) async {
     List<dynamic> texts = await _channel.invokeMethod(
-        "FirebaseVisionTextDetector#detectFromPath", {'filepath': filepath});
+        "FirebaseVisionTextDetector#detectFromPath", {'filepath': filepath, 'rotation': rotateAngle});
     List<VisionText> ret = [];
     if (texts != null) {
       texts.forEach((dynamic item) {
